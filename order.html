@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Delights Bakery | Order</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional styles for the order page */
+      .order-hero {
+        background-color: var(--secondary-color);
+        padding: 120px 0 40px 0;
+        margin-top: 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .order-hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+      }
+
+      .order-hero::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        z-index: 0;
+      }
+
+      .order-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .order-hero p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: var(--light-text);
+      }
+
+      .order-content {
+        padding: 80px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .order-section {
+        margin-bottom: 40px;
+      }
+
+      .order-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .order-section h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: var(--primary-color);
+      }
+
+      .order-methods {
+        margin-top: 30px;
+      }
+
+      .order-method {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .order-method h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .order-method h3 i {
+        margin-right: 15px;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+      }
+
+      .order-method p {
+        color: var(--light-text);
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .contact-info {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 1.1rem;
+      }
+
+      .contact-info i {
+        width: 40px;
+        height: 40px;
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: var(--accent-color);
+      }
+
+      .order-form {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+      }
+
+      .form-group textarea {
+        height: 120px;
+        resize: vertical;
+      }
+      .form-group input:focus {
+        border-width: 2px;
+        border-color: var(--primary-color);
+        outline: none;
+      }
+      .form-group select:focus {
+        border-width: 2px;
+        border-color: var(--primary-color);
+        outline: none;
+      }
+      textarea:focus {
+        border-width: 2px;
+        border-color: var(--primary-color);
+        outline: none;
+      }
+      .form-group select {
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+      }
+
+      .submit-btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        display: block;
+        width: 100%;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--primary-dark);
+      }
+
+      @media screen and (max-width: 992px) {
+        .order-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h1>Sweet Delights</h1>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="order.html" class="active">Order</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+        <div class="cart-icon-container">
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="order-hero">
+        <h1>How to <span class="highlight">Order</span></h1>
+        <p>
+          We offer multiple convenient ways to order our freshly baked treats.
+          Choose the method that works best for you!
+        </p>
+      </section>
+
+      <div class="order-content">
+        <div class="order-info">
+          <div class="order-section">
+            <h2>Ordering Methods</h2>
+            <div class="order-methods">
+              <div class="order-method">
+                <h3><i class="fas fa-phone"></i> Order by Phone</h3>
+                <p>
+                  Call us directly to place your order. Our friendly staff will
+                  assist you with selecting the perfect treats for any occasion.
+                </p>
+                <p><strong>Call us at:</strong>+977-9807016111</p>
+              </div>
+
+              <!-- <div class="order-method">
+                <h3><i class="fas fa-store"></i> Order in Person</h3>
+                <p>
+                  Visit our bakery to see our full selection of freshly baked
+                  goods. You can place your order directly at our counter.
+                </p>
+                <p>
+                  <strong>Address:</strong> 123 Sweet Street, Bakery District,
+                  BC 12345
+                </p>
+                <p>
+                  <strong>Hours:</strong> Monday - Friday, 7:00 AM - 7:00 PM
+                </p>
+              </div> -->
+
+              <div class="order-method">
+                <h3><i class="fas fa-envelope"></i> Order by Email</h3>
+                <p>
+                  Send us an email with your order details, including the items,
+                  quantities, and your contact information. We'll respond within
+                  24 hours to confirm your order.
+                </p>
+                <p><strong>Email:</strong> orders@sweetdelights.com</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-section">
+            <h2>Contact Information</h2>
+            <div class="contact-list">
+              <div class="contact-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <p>Krishna Mandir Street</p>
+                </div>
+              </div>
+
+              <div class="contact-info">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <p>+977-9807016111</p>
+                </div>
+              </div>
+
+              <div class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <p>info@sweetdelights.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-form-container">
+          <h2>Order Request Form</h2>
+          <p>
+            Fill out this form to request an order. We'll contact you to
+            finalize details.
+          </p>
+
+          <form class="order-form">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-group">
+              <label for="order-type">Order Type</label>
+              <select id="order-type" name="order-type" required>
+                <option value="" disabled selected>Select an order type</option>
+                <option value="standard">Standard Order</option>
+                <option value="custom-cake">Custom Cake</option>
+                <option value="catering">Catering Order</option>
+                <option value="special-event">Special Event</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="date-needed">Date Needed</label>
+              <input type="date" id="date-needed" name="date-needed" required />
+            </div>
+
+            <div class="form-group">
+              <label for="order-details">Order Details</label>
+              <textarea
+                id="order-details"
+                name="order-details"
+                placeholder="Please describe what you'd like to order, including item names, quantities, and any special instructions or dietary requirements."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              Submit Order Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h2>Sweet Delights</h2>
+          <p>Baking happiness since 2022</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="order.html">Order</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section address-section">
+            <h3>Visit Us</h3>
+            <address>
+              <p><i class="fas fa-map-marker-alt"></i> Krishna Mandir Street</p>
+              <p><i class="fas fa-phone"></i> +977-9807016111</p>
+              <p><i class="fas fa-envelope"></i> info@sweetdelights.com</p>
+            </address>
+          </div>
+          <div class="footer-section">
+            <h3>Hours</h3>
+            <ul class="hours-list">
+              <li><span>Monday - Friday:</span> 7:00 AM - 7:00 PM</li>
+              <li><span>Saturday:</span> 8:00 AM - 6:00 PM</li>
+              <li><span>Sunday:</span> 8:00 AM - 3:00 PM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-social footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.facebook.com" class="social-icon"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com" class="social-icon"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.pinterest.com" class="social-icon"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+            <a href="https://www.x.com" class="social-icon"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+        <p>Designed with <i class="fas fa-heart"></i> by Muskan Thakur</p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderForm = document.querySelector(".order-form");
+
+        if (orderForm) {
+          orderForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const orderType = document.getElementById("order-type").value;
+            const dateNeeded = document.getElementById("date-needed").value;
+            const orderDetails = document.getElementById("order-details").value;
+
+            // In a real application, you would send this data to a server
+            // For now, just show a success message
+            alert(
+              `Thank you, ${name}! Your order request has been submitted. We'll contact you shortly to confirm the details.`
+            );
+
+            // Reset the form
+            this.reset();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

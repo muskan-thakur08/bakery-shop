@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Delights Bakery | Our Products</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional styles for the products page */
+      .products-hero {
+        background-color: var(--secondary-color);
+        padding: 120px 0 40px 0;
+        position: relative;
+        margin-top: 1rem;
+        text-align: center;
+        overflow: hidden;
+      }
+      .products-hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+      }
+
+      .products-hero::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        z-index: 0;
+      }
+
+      .products-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .products-hero p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: var(--light-text);
+      }
+
+      .product-categories {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .category-btn {
+        padding: 8px 20px;
+        background-color: white;
+        border: 1px solid var(--primary-color);
+        border-radius: 30px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .category-btn:hover,
+      .category-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 60px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(230, 156, 180, 0.2);
+      }
+
+      .product-image {
+        height: 220px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .product-info h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+
+      .product-info p {
+        color: var(--light-text);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      .product-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .price {
+        font-weight: 600;
+        color: var(--accent-color);
+        font-size: 1.2rem;
+      }
+
+      .add-to-cart {
+        padding: 8px 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+
+      .add-to-cart:hover {
+        background-color: var(--primary-dark);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h1>Sweet Delights</h1>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html" class="active">Our Products</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+        <div class="cart-icon-container">
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="products-hero">
+        <h1>Our <span class="highlight">Products</span></h1>
+        <p>
+          Explore our wide range of handcrafted baked goods made with the finest
+          ingredients and baked with love daily.
+        </p>
+        <div class="product-categories">
+          <button class="category-btn active">All</button>
+          <button class="category-btn">Cakes</button>
+          <button class="category-btn">Cookies</button>
+          <button class="category-btn">Pastries</button>
+          <button class="category-btn">Breads</button>
+          <button class="category-btn">Cupcakes</button>
+        </div>
+      </section>
+
+      <section class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/special1.jpg" alt="Strawberry Shortcake" />
+          </div>
+          <div class="product-info">
+            <h3>Strawberry Shortcake</h3>
+            <p class="description">
+              Light vanilla sponge layered with fresh strawberries and whipped
+              cream.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$32.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/special2.jpg" alt="Chocolate Ganache Tart" />
+          </div>
+          <div class="product-info">
+            <h3>Chocolate Ganache Tart</h3>
+            <p class="description">
+              Rich chocolate ganache in a buttery chocolate crust, topped with
+              gold leaf.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$28.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/special3.jpg" alt="Lemon Meringue Cupcakes" />
+          </div>
+          <div class="product-info">
+            <h3>Lemon Meringue</h3>
+            <p class="description">
+              Tangy lemon cupcakes with lemon curd center and torched meringue
+              topping.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$18.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/cake-main.png" alt="Red Velvet Cake" />
+          </div>
+          <div class="product-info">
+            <h3>Red Velvet Cake</h3>
+            <p class="description">
+              Classic red velvet cake with cream cheese frosting and white
+              chocolate shavings.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$36.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/cookie.png" alt="Chocolate Chip Cookies" />
+          </div>
+          <div class="product-info">
+            <h3>Chocolate Chip Cookies</h3>
+            <p class="description">
+              Soft and chewy cookies loaded with premium chocolate chips.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$14.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/croissant.png" alt="Butter Croissants" />
+          </div>
+          <div class="product-info">
+            <h3>Butter Croissants</h3>
+            <p class="description">
+              Flaky, buttery croissants baked to golden perfection. Pack of 4.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$12.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/macaron.png" alt="Assorted Macarons" />
+          </div>
+          <div class="product-info">
+            <h3>Assorted Macarons</h3>
+            <p class="description">
+              Delicate French macarons in various flavors. Box of 8.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$22.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/donut.png" alt="Glazed Donuts" />
+          </div>
+          <div class="product-info">
+            <h3>Glazed Donuts</h3>
+            <p class="description">
+              Light and fluffy donuts with a sweet vanilla glaze. Box of 6.
+            </p>
+            <div class="product-meta">
+              <span class="price current-price">$16.99</span>
+              <button class="order-btn">Add to Order</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h2>Sweet Delights</h2>
+          <p>Baking happiness since 2022</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="order.html">Order</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section address-section">
+            <h3>Visit Us</h3>
+            <address>
+              <p><i class="fas fa-map-marker-alt"></i> Krishna Mandir Street</p>
+              <p><i class="fas fa-phone"></i> +977-9807016111</p>
+              <p><i class="fas fa-envelope"></i> info@sweetdelights.com</p>
+            </address>
+          </div>
+          <div class="footer-section">
+            <h3>Hours</h3>
+            <ul class="hours-list">
+              <li><span>Monday - Friday:</span> 7:00 AM - 7:00 PM</li>
+              <li><span>Saturday:</span> 8:00 AM - 6:00 PM</li>
+              <li><span>Sunday:</span> 8:00 AM - 3:00 PM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-social footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.facebook.com" class="social-icon"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com" class="social-icon"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.pinterest.com" class="social-icon"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+            <a href="https://www.x.com" class="social-icon"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+        <p>Designed with <i class="fas fa-heart"></i> by Muskan Thakur</p>
+      </div>
+    </footer>
+    <script src="js/script.js"></script>
+  </body>
+</html>

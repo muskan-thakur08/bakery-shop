@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Delights Bakery | About Us</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* About page specific styles */
+      .about-hero {
+        background-color: var(--secondary-color);
+        padding: 120px 0 40px 0;
+        margin-top: 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-hero p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        font-size: 1.1rem;
+        color: var(--text-color);
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+      }
+
+      .about-hero::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        z-index: 0;
+      }
+
+      .our-story {
+        padding: 80px 0;
+      }
+
+      .story-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        padding: 0 20px;
+      }
+
+      .story-section {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .story-section:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .story-image {
+        flex: 1;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+      }
+
+      .story-content {
+        flex: 1;
+      }
+
+      .story-content h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        color: var(--accent-color);
+      }
+
+      .story-content p {
+        margin-bottom: 15px;
+        line-height: 1.8;
+        color: var(--light-text);
+      }
+
+      .team-section {
+        background-color: var(--background);
+        padding: 80px 0;
+      }
+
+      .team-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .team-member {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .team-member:hover {
+        transform: translateY(-10px);
+      }
+
+      .member-image {
+        height: 280px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+      }
+
+      .member-image img {
+        width: 200px;
+        height: 100%;
+
+        border-radius: 12px;
+        padding: 5px;
+        border: 2px solid var(--primary-color);
+        transition: var(--transition);
+      }
+
+      .team-member:hover .member-image img {
+        transform: scale(1.05);
+      }
+
+      .member-info {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .member-info h3 {
+        margin-bottom: 5px;
+        font-size: 1.4rem;
+      }
+
+      .member-info .position {
+        color: var(--primary-color);
+        font-style: italic;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .member-info p {
+        color: var(--light-text);
+        margin-bottom: 15px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-links a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: var(--secondary-color);
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* Responsive styles */
+      @media (max-width: 992px) {
+        .story-section {
+          flex-direction: column !important;
+        }
+
+        .story-image,
+        .story-content {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .about-hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .story-content h2 {
+          font-size: 1.8rem;
+        }
+
+        .team-grid,
+        .values-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .about-hero {
+          padding: 60px 0;
+        }
+
+        .about-hero h1 {
+          font-size: 2rem;
+        }
+
+        .story-content h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h1>Sweet Delights</h1>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+        <div class="cart-icon-container">
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="about-hero">
+        <div class="container">
+          <h1>Our <span class="highlight">Story</span></h1>
+          <p>
+            Sweet Delights Bakery is more than just a place for delicious
+            treats. It's a story of passion, dedication, and the joy of creating
+            moments of happiness through baking.
+          </p>
+        </div>
+      </section>
+
+      <section class="our-story">
+        <div class="story-container">
+          <div class="story-section">
+            <div class="story-image">
+              <img src="images/cakeshop.jpg" alt="Our bakery's beginning" />
+            </div>
+            <div class="story-content">
+              <h2>How It All Began</h2>
+              <p>
+                Sweet Delights was born from a simple passion for baking. What
+                started as weekend baking for family and friends in 2022 quickly
+                grew into something much bigger.
+              </p>
+              <p>
+                Our founder, Muskan, turned his grandmother's recipes and modern
+                baking techniques into the foundation of what would become one
+                of the most beloved bakeries in the city.
+              </p>
+              <p>
+                With just a small kitchen and big dreams, Sweet Delights
+                officially opened its doors in 2022, offering a small selection
+                of pastries and cakes that quickly gained a loyal following.
+              </p>
+            </div>
+          </div>
+
+          <div class="story-section">
+            <div class="story-image">
+              <img src="images/cakefront.jpg" alt="Our bakery's growth" />
+            </div>
+            <div class="story-content">
+              <h2>Growing with the Community</h2>
+              <p>
+                As word spread about our delicious treats, so did our bakery. By
+                2024, we had moved to a larger location and expanded our menu to
+                include a wide variety of breads, pastries, and specialty cakes.
+              </p>
+              <p>
+                We've always believed that baking is about bringing people
+                together. That's why we focus on creating an inviting atmosphere
+                where customers can feel at home while enjoying our freshly
+                baked goods.
+              </p>
+              <p>
+                Over the years, we've had the honor of being part of countless
+                celebrations – from birthdays and weddings to graduations and
+                anniversaries. Each event has become part of our story.
+              </p>
+            </div>
+          </div>
+
+          <div class="story-section">
+            <div class="story-image">
+              <img src="images/cake-main.png" alt="Our bakery today" />
+            </div>
+            <div class="story-content">
+              <h2>Sweet Delights Today</h2>
+              <p>
+                Today, Sweet Delights continues to be a family-owned business
+                with a team of passionate bakers who share our commitment to
+                quality and creativity.
+              </p>
+              <p>
+                We still use many of the original recipes that made us famous,
+                while continuously innovating to bring exciting new flavors and
+                designs to our customers.
+              </p>
+              <p>
+                Our bakery has grown, but our values remain the same – to create
+                delicious, high-quality baked goods that bring joy to people's
+                lives and to treat every customer like family.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="team-section">
+        <div class="team-container">
+          <div class="section-heading">
+            <h2>Meet Our <span class="highlight">Team</span></h2>
+            <div class="decorative-line">
+              <span class="line-dot"></span>
+              <span class="line"></span>
+              <span class="line-dot"></span>
+            </div>
+          </div>
+
+          <div class="team-grid">
+            <div class="team-member">
+              <div class="member-image">
+                <img
+                  src="images/profile.jpg"
+                  alt="Muskan - Founder & Head Baker"
+                />
+              </div>
+              <div class="member-info">
+                <h3>Muskan Thakur</h3>
+                <span class="position">Founder</span>
+                <p>
+                  With over 3 years of baking experience, Muskan brings his
+                  passion and creativity to every recipe.
+                </p>
+                <div class="social-links">
+                  <a href="https://www.instagram.com"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="https://www.x.com"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.linkedin.com"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image">
+                <img src="images/baker.jpg" alt="Pramod - Head Baker" />
+              </div>
+              <div class="member-info">
+                <h3>Pramod Laha</h3>
+                <span class="position">Head Baker</span>
+                <p>
+                  Pramod specializes in creating exquisite pastries and desserts
+                  that are as beautiful as they are delicious.
+                </p>
+                <div class="social-links">
+                  <a href="https://www.instagram.com"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="https://www.x.com"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.linkedin.com"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image">
+                <img src="images/customer3.jpg" alt="Puja - Cake Decorator" />
+              </div>
+              <div class="member-info">
+                <h3>Puja Thakur</h3>
+                <span class="position">Cake Decorator</span>
+                <p>
+                  Puja's artistic talent turns ordinary cakes into
+                  extraordinary works of art for any special occasion.
+                </p>
+                <div class="social-links">
+                  <a href="https://www.instagram.com"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="https://www.x.com"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.linkedin.com"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h2>Sweet Delights</h2>
+          <p>Baking happiness since 2022</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="order.html">Order</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section address-section">
+            <h3>Visit Us</h3>
+            <address>
+              <p><i class="fas fa-map-marker-alt"></i> Krishna Mandir Street</p>
+              <p><i class="fas fa-phone"></i> +977-9807016111</p>
+              <p><i class="fas fa-envelope"></i> info@sweetdelights.com</p>
+            </address>
+          </div>
+          <div class="footer-section">
+            <h3>Hours</h3>
+            <ul class="hours-list">
+              <li><span>Monday - Friday:</span> 7:00 AM - 7:00 PM</li>
+              <li><span>Saturday:</span> 8:00 AM - 6:00 PM</li>
+              <li><span>Sunday:</span> 8:00 AM - 3:00 PM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-social footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.facebook.com" class="social-icon"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com" class="social-icon"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.pinterest.com" class="social-icon"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+            <a href="https://www.x.com" class="social-icon"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+        <p>Designed with <i class="fas fa-heart"></i> by Muskan Thakur</p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
