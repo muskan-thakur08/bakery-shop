@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Delights Bakery | Gallery</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional styles for the gallery page */
+      .gallery-hero {
+        background-color: var(--secondary-color);
+        padding: 120px 0 40px 0;
+        margin-top: 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .gallery-hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+      }
+
+      .gallery-hero::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 133, 162, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        z-index: 0;
+      }
+      .gallery-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .gallery-hero p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: var(--light-text);
+      }
+
+      .gallery-filters {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 8px 20px;
+        background-color: white;
+        border: 1px solid var(--primary-color);
+        border-radius: 30px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .gallery-container {
+        padding: 60px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .gallery-item-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
+
+      .gallery-item-overlay h3 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+      }
+
+      .gallery-item-overlay p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        overflow: auto;
+        padding: 50px 20px;
+      }
+
+      .modal-content {
+        display: block;
+        margin: 0 auto;
+        max-width: 80%;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+
+      .modal-caption {
+        text-align: center;
+        color: white;
+        padding: 20px 0;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .modal-content {
+          max-width: 95%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h1>Sweet Delights</h1>
+        </div>
+        <div class="menu-toggle">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+        <div class="cart-icon-container">
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="gallery-hero">
+        <h1>Our <span class="highlight">Gallery</span></h1>
+        <p>
+          Explore our photo gallery showcasing our most beautiful creations and
+          happy moments with our customers.
+        </p>
+
+        <div class="gallery-filters">
+          <button class="filter-btn active">All</button>
+          <button class="filter-btn">Cakes</button>
+          <button class="filter-btn">Weddings</button>
+          <button class="filter-btn">Pastries</button>
+          <button class="filter-btn">Events</button>
+        </div>
+      </section>
+
+      <section class="gallery-container">
+        <div class="gallery-grid">
+          <div class="gallery-item" data-category="cakes">
+            <img src="images/special1.jpg" alt="Strawberry Cake" />
+            <div class="gallery-item-overlay">
+              <h3>Strawberry Shortcake</h3>
+              <p>
+                A light and fluffy vanilla cake with fresh strawberries and
+                whipped cream
+              </p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="pastries">
+            <img src="images/special2.jpg" alt="Chocolate Tart" />
+            <div class="gallery-item-overlay">
+              <h3>Chocolate Ganache Tart</h3>
+              <p>Rich dark chocolate ganache in a buttery chocolate crust</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cakes">
+            <img src="images/special3.jpg" alt="Lemon Cupcakes" />
+            <div class="gallery-item-overlay">
+              <h3>Lemon Meringue Cupcakes</h3>
+              <p>Tangy lemon cupcakes with torched meringue topping</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="weddings">
+            <img src="images/cake-main.png" alt="Wedding Cake" />
+            <div class="gallery-item-overlay">
+              <h3>Elegant Wedding Cake</h3>
+              <p>
+                Three-tier vanilla cake with buttercream frosting and fresh
+                flowers
+              </p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="pastries">
+            <img src="images/cookie.png" alt="Cookies" />
+            <div class="gallery-item-overlay">
+              <h3>Assorted Cookies</h3>
+              <p>Freshly baked cookies in various flavors</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="pastries">
+            <img src="images/croissant.png" alt="Croissants" />
+            <div class="gallery-item-overlay">
+              <h3>Buttery Croissants</h3>
+              <p>Flaky, golden croissants made with French butter</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cakes">
+            <img src="images/donut.png" alt="Donuts" />
+            <div class="gallery-item-overlay">
+              <h3>Glazed Donuts</h3>
+              <p>Light and fluffy donuts with a sweet vanilla glaze</p>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="pastries">
+            <img src="images/macaron.png" alt="Macarons" />
+            <div class="gallery-item-overlay">
+              <h3>French Macarons</h3>
+              <p>Delicate almond meringue cookies with various fillings</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="galleryModal" class="modal">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="modalImage" alt="modal" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <span class="logo-icon"><i class="fas fa-cookie"></i></span>
+          <h2>Sweet Delights</h2>
+          <p>Baking happiness since 2022</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="order.html">Order</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section address-section">
+            <h3>Visit Us</h3>
+            <address>
+              <p><i class="fas fa-map-marker-alt"></i> Krishna Mandir Street</p>
+              <p><i class="fas fa-phone"></i> +977-9807016111</p>
+              <p><i class="fas fa-envelope"></i> info@sweetdelights.com</p>
+            </address>
+          </div>
+          <div class="footer-section">
+            <h3>Hours</h3>
+            <ul class="hours-list">
+              <li><span>Monday - Friday:</span> 7:00 AM - 7:00 PM</li>
+              <li><span>Saturday:</span> 8:00 AM - 6:00 PM</li>
+              <li><span>Sunday:</span> 8:00 AM - 3:00 PM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-social footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.facebook.com" class="social-icon"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com" class="social-icon"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.pinterest.com" class="social-icon"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+            <a href="https://www.x.com" class="social-icon"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+        <p>Designed with <i class="fas fa-heart"></i> by Muskan Thakur</p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Gallery filtering
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const category = this.textContent.toLowerCase();
+
+            // Show or hide gallery items based on category
+            if (category === "all") {
+              galleryItems.forEach((item) => (item.style.display = "block"));
+            } else {
+              galleryItems.forEach((item) => {
+                if (item.dataset.category === category) {
+                  item.style.display = "block";
+                } else {
+                  item.style.display = "none";
+                }
+              });
+            }
+          });
+        });
+
+        // Image modal functionality
+        const modal = document.getElementById("galleryModal");
+        const modalImg = document.getElementById("modalImage");
+        const modalCaption = document.getElementById("modalCaption");
+        const closeModal = document.querySelector(".close-modal");
+
+        galleryItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            modal.style.display = "block";
+            modalImg.src = this.querySelector("img").src;
+
+            const title = this.querySelector("h3").textContent;
+            const desc = this.querySelector("p").textContent;
+            modalCaption.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+          });
+        });
+
+        closeModal.addEventListener("click", function () {
+          modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
